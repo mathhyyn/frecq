@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/users_list.dart';
+import 'widgets/users_list.dart';
 
 
 class MainScreen extends StatelessWidget {
