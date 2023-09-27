@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/user.dart';
+import 'pages/users_list.dart';
 
 
 class MainScreen extends StatelessWidget {
@@ -10,8 +10,8 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('main page')),
       body: Center(child: TextButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const SecondScreen()));
-      }, child: const Text('open second page'))),
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const UsersListPage()));
+      }, child: const Text('open users list'))),
     );
   }
 }
