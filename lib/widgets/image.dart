@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class ImageWidget extends StatelessWidget {
+  final int _id;
+
+  const ImageWidget(this._id, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('second page')),
+      appBar: AppBar(title: const Text('image widget')),
       body: Center(child: TextButton(onPressed: (){
         Navigator.pop(context);
       }, child: const Text('back'))),
