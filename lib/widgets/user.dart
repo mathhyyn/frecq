@@ -17,23 +17,25 @@ class SecondScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(_id.toString()),
       ),
-      body: const Center(
-        child: RawScrollbarExample(),
+      body: Center(
+        child: RawScrollbarExample(this._id),
       ),
     );
   }
 }
 
 class RawScrollbarExample extends StatefulWidget {
-  const RawScrollbarExample({super.key});
+  final int _id;
+  const RawScrollbarExample(this._id,{super.key});
 
   @override
-  State<RawScrollbarExample> createState() => _RawScrollbarExampleState();
+  State<RawScrollbarExample> createState() => _RawScrollbarExampleState(_id);
 }
 
 class _RawScrollbarExampleState extends State<RawScrollbarExample> {
+  final int _id;
   final ScrollController _firstController = ScrollController();
-
+  _RawScrollbarExampleState (this._id);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -54,10 +56,7 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                         controller: _firstController,
                         itemCount: 5,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text('${users[index]}', textAlign: TextAlign.center,),
-                          );
+                          return ImageWidget(_id, index);
                         }),
                   )),
             ],
