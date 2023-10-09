@@ -9,7 +9,7 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          color: Colors.red,
+          color: Color.fromARGB(50, 0, 250, 154),
           child: Text("aboba")
     );
   }

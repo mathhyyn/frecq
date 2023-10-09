@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/users_list.dart';
 
-
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
