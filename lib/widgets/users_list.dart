@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'user.dart';
-import 'image.dart';
 
-const List<int> users = <int>[1, 2];
+const List<int> users = <int>[1, 2, 3, 666];
 
 class UsersListPage extends StatelessWidget {
   const UsersListPage({super.key});
@@ -22,9 +21,10 @@ class UsersListPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SecondScreen(users[index])));
+                              builder: (context) =>
+                                  SecondScreen(users[index])));
                     },
-                    child: Text('user page $index'))
+                    child: Text('user page ${users[index]}'))
               ],
             );
           }),

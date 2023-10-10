@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  final int _id;
-  final int index;
+  final int _userId;
+  final int _imageId;
 
-  const ImageWidget(this._id, this.index, {super.key});
+  const ImageWidget(this._userId, this._imageId, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-          color: Color.fromARGB(50, 0, 250, 154),
-          child: Text("aboba")
-    );
+        color: const Color.fromARGB(50, 0, 250, 154),
+        child: Text("image $_imageId ($_userId)"));
   }
 }

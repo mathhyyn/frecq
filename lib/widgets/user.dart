@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'image.dart';
 
-const List<String> users = <String>["Tom", "Alice", "Bob", "Sam", "Kate"];
-
 class SecondScreen extends StatelessWidget {
   final int _id;
   final String date1 = "13.08.2002";
@@ -18,7 +16,7 @@ class SecondScreen extends StatelessWidget {
         title: Text(_id.toString()),
       ),
       body: Center(
-        child: RawScrollbarExample(this._id),
+        child: RawScrollbarExample(_id),
       ),
     );
   }
@@ -43,48 +41,56 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
+      List<int> images = <int>[];
+      for (int i = 0; i < 50; i++) {
+        images.add(i);
+      }
+      /* something */
+
       return Container(
-          color: Color.fromARGB(50, 0, 250, 154),
-          child:Column(
-
-        children: <Widget>[
-          Padding(
-
-            padding: EdgeInsets.all(8),
-            child: Align(
-
-              alignment: Alignment.topCenter,
-              child: Text('Petya', style: TextStyle(fontSize: 25.0),),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Text('$date1'),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Text('$date2'),
-            ),
-          ),
-          Expanded(
-              flex: 1,
-              child: Scrollbar(
+          color: const Color.fromARGB(50, 0, 250, 154),
+          child: Column(
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(8),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'Petya',
+                    style: TextStyle(fontSize: 25.0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text('Date of first recognition: $date1'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Text('Date of last recognition: $date2'),
+                ),
+              ),
+              Expanded(
+                  /*
+                * images list style
+                */
+                  child: Scrollbar(
                 thumbVisibility: true,
                 controller: _firstController,
                 child: ListView.builder(
                     controller: _firstController,
-                    itemCount: 100,
+                    itemCount: images.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ImageWidget(_id, index);
+                      return ImageWidget(_id, images[index]);
                     }),
               )),
-        ],
-      ));
+            ],
+          ));
     });
   }
 }
