@@ -11,5 +11,6 @@ app.use(express.json());
 const Users = require('./db/users');
 
 let db_users = new Users();
-app.get('/allUsers', db_users.loadProfilePage);
+app.get('/allUsers', db_users.getAllUsers);
+app.get('/getUserById', db_users.getUserById);
 /* another requests */
