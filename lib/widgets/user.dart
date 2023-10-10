@@ -27,6 +27,7 @@ class RawScrollbarExample extends StatefulWidget {
   const RawScrollbarExample(this._id, {super.key});
 
   @override
+  // ignore: no_logic_in_create_state
   State<RawScrollbarExample> createState() => _RawScrollbarExampleState(_id);
 }
 
