@@ -28,6 +28,12 @@ class UserDB {
 
   Future<List<dynamic>> getUserById(int id) async =>
       await _getData('/getUserById?id=$id');
+
+  Future<List<dynamic>> getAllImages(int userId) async =>
+      await _getData('/getAllImages?id=$userId');
+
+  Future<List<dynamic>> getImageById(int imageId) async =>
+      await _getData('/getImageById?id=$imageId');
   /* etc */
 }
 
