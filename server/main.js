@@ -1,7 +1,14 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 require('dotenv').config();
 const port = process.env.SERV_PORT;
+
+app.use(express.static(path.join(__dirname, 'dataset')))
+
+app.get('/', (req, res) => {
+    res.sendFile('${__dirname}/dataset/');
+});
 
 app.listen(port, () => {
     console.log("listen server " + port);
