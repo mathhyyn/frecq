@@ -6,6 +6,7 @@ services:
     env_file: .env
     ports:
       - "${DB_PORT}:${DB_PORT}" #-"${DB_PORT}:5432"
+    command: -p ${DB_PORT}
     networks:
       - networkName1
 
@@ -23,7 +24,7 @@ services:
       - '${SERV_PORT}:${SERV_PORT}'
     networks:
       - networkName1
-    command: bash -c 'sleep 5; npm start'
+    command: bash -c 'sleep 10; npm start'
 
 
 networks:
