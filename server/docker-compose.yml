@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  postgres:
+    image: postgres
+    env_file: .env
+    ports:
+      - "${DB_PORT}:${DB_PORT}" #-"${DB_PORT}:5432"
+    command: -p ${DB_PORT}
+    networks:
+      - networkName1
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  node:
+    depends_on:
+      - postgres
+
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    env_file: .env
+    environment:
+      - DB_HOST=postgres
+    ports:
+      - '${SERV_PORT}:${SERV_PORT}'
+    networks:
+      - networkName1
+    command: bash -c 'sleep 10; npm start'
+
+
+networks:
+  networkName1:
+    driver: bridge
+
+volumes:
+  db-data:
+

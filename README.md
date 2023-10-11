@@ -1,16 +1,18 @@
 # frecq
 
-A new Flutter project.
+App for reading data from the face recognition database
 
-## Getting Started
+### Getting Started
 
-This project is a starting point for a Flutter application.
+to run server:
 
-A few resources to get you started if this is your first Flutter project:
+```cd server```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```docker compose up```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```cat ./facerecdb.dump | PGPASSWORD=postgres psql -h localhost -d frecqdb -U frecquser -p 8008```
+(имя бд, пользователь и пароль должны совпадать с переменными, определенными в `server/.env`)
+
+to run app:
+
+```flutter run```
