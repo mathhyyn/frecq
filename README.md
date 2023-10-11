@@ -8,9 +8,9 @@ to run server:
 
 ```cd server```
 
-```npm install```
+```docker compose up```
 
-```node main.js```
+```cat ./facerecdb.dump | PGPASSWORD=postgres psql -h localhost -U postgres```
 
 to run app:
 
