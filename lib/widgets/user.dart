@@ -123,8 +123,8 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                             controller: _firstController,
                             itemCount: dataList2.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return ImageWidget(
-                                  _id, dataList1[0]["name"], dataList2[index]);
+                              return ImageWidget(dataList1[0]["name"],
+                                  index + 1, dataList2[index]["dateandtime"]);
                             }))),
               ],
             ));

@@ -35,9 +35,9 @@ class Users {
             }
             else {
                 let images_info = results.rows;
-                for (let i = 0; i < images_info.length; i++) {
+                /*for (let i = 0; i < images_info.length; i++) {
                     images_info[i].imagenumber = i + 1;
-                }
+                }*/
                 response.status(200).json(images_info);
             }
         });

@@ -2,23 +2,28 @@ import 'package:flutter/material.dart';
 import '../api/user.dart' show usrDB;
 
 class ImageWidget extends StatelessWidget {
-  final int _userId;
   final String _userName;
-  late final int _imageId;
-  late final int _imageNumber;
-  late final String _imageDate;
+  final int _imageNum;
+  final String _imageInfo;
 
-  ImageWidget(this._userId, this._userName, image, {super.key}) {
-    print(image);
-    _imageId = image["imageid"];
-    _imageNumber = image["imagenumber"];
-    _imageDate = image["dateandtime"];
-  }
+  const ImageWidget(this._userName, this._imageNum, this._imageInfo, {super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Container(
-        color: const Color.fromARGB(50, 0, 250, 154),
-        child: Text("image $_imageId ($_userId)"));
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          color: const Color.fromARGB(50, 0, 250, 154),
+          child: Column(
+            children: [
+              Image.network("${usrDB.serv}/$_userName/img_$_imageNum.jpg"),
+              Text(_imageInfo),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
