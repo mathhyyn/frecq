@@ -2,12 +2,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class UserDB {
-  const UserDB();
+  final int _port = 3000;
+  final String _host = 'http://localhost';
+  String _serv = '';
+
+  UserDB() {
+    _serv = '$_host:$_port';
+  }
+
+  get serv => _serv;
 
   Future<List<dynamic>> _getData(String path) async {
-    List<dynamic> listUsers = await http
-        .get(Uri.parse('http://localhost:3000$path'))
-        .then((response) {
+    List<dynamic> listUsers =
+        await http.get(Uri.parse('$_serv$path')).then((response) {
       return json.decode(response.body);
     }).catchError((error) {
       // ignore: avoid_print
@@ -34,7 +41,8 @@ class UserDB {
 
   Future<List<dynamic>> getImageById(int imageId) async =>
       await _getData('/imageById?id=$imageId');
+
   /* etc */
 }
 
-UserDB usrDB = const UserDB();
+UserDB usrDB = UserDB();

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../api/user.dart' show usrDB;
 import 'image.dart';
 
-
 class SecondScreen extends StatelessWidget {
   final int _id;
 
@@ -50,12 +49,12 @@ class RawScrollbarExample extends StatefulWidget {
 }
 
 class _RawScrollbarExampleState extends State<RawScrollbarExample> {
-  Future<List<dynamic>> getUserById(int _id) async {
-    return await usrDB.getUserById(_id);
+  Future<List<dynamic>> getUserById(int id) async {
+    return await usrDB.getUserById(id);
   }
 
-  Future<List<dynamic>> getAllImages(int _id) async {
-    return await usrDB.getAllImages(_id);
+  Future<List<dynamic>> getAllImages(int id) async {
+    return await usrDB.getAllImages(id);
   }
 
   final int _id;
@@ -115,11 +114,10 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                       ),
                     ),
               Expanded(
-                /*
-                * images list style
-                */
-                child: Scrollbar(
-                            thumbVisibility: true,
+                    child: Scrollbar(
+                        thumbVisibility: true,
+                        controller: _firstController,
+                        child: ListView.builder(
                             controller: _firstController,
                             child: ListView.builder(
                                 controller: _firstController,

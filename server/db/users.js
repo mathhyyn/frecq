@@ -33,7 +33,13 @@ class Users {
                 console.log("DETAILS ", error.detail);
                 response.status(400).json(error);
             }
-            else response.status(200).json(results.rows)
+            else {
+                let images_info = results.rows;
+                /*for (let i = 0; i < images_info.length; i++) {
+                    images_info[i].imagenumber = i + 1;
+                }*/
+                response.status(200).json(images_info);
+            }
         });
     }
 

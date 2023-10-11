@@ -10,7 +10,8 @@ to run server:
 
 ```docker compose up```
 
-```cat ./facerecdb.dump | PGPASSWORD=postgres psql -h localhost -U postgres```
+```cat ./facerecdb.dump | PGPASSWORD=postgres psql -h localhost -d frecqdb -U frecquser -p 8008```
+(имя бд, пользователь и пароль должны совпадать с переменными, определенными в `server/.env`)
 
 to run app:
 
