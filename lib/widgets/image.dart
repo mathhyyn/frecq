@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  final int _userId;
-  final int _imageId;
+  final String _userName;
+  final int _imageNum;
+  final String _imageInfo;
 
-  const ImageWidget(this._userId, this._imageId, {super.key});
+  const ImageWidget(this._userName, this._imageNum, this._imageInfo, {super.key});
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Container(
-        color: const Color.fromARGB(50, 0, 250, 154),
-        child: Text("image $_imageId ($_userId)"));
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          color: const Color.fromARGB(50, 0, 250, 154),
+          child: Column(
+            children: [
+              Image.network("http://localhost:3000/$_userName/img_$_imageNum.jpg"),
+              Text(_imageInfo),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
