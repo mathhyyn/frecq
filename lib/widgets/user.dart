@@ -37,8 +37,13 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
     return await usrDB.getUserById(_id);
   }
 
+  Future<List<dynamic>> getAllImages(int _id) async {
+    return await usrDB.getAllImages(_id);
+  }
+
   final int _id;
-  List<dynamic> dataList = [];
+  List<dynamic> dataList1 = [];
+  List<dynamic> dataList2 = [];
   final String date1 = "13.08.2002";
   final String date2 = "13.08.2002";
   final ScrollController _firstController = ScrollController();
@@ -53,7 +58,8 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
   Future<void> fetchData() async {
     try {
       // Выполните запрос и получите данные
-      dataList = await getUserById(_id);
+      dataList1 = await getUserById(_id);
+      dataList2 = await getAllImages(_id);
     } catch (error) {
       // Обработка ошибок
     }
@@ -66,7 +72,7 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
 
   @override
   Widget build(BuildContext context) {
-    if (dataList.isEmpty) {
+    if (dataList1.isEmpty) {
       // Возвращаем индикатор загрузки или другой виджет пока запрос выполняется
       return const CircularProgressIndicator();
     } else {
@@ -87,7 +93,7 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                       padding: EdgeInsets.all(8),
                       child: Align(
                         alignment: Alignment.topCenter,
-                        child: Text('Name: ${dataList[0]["name"]}',
+                        child: Text('Name: ${dataList1[0]["name"]}',
                             style: TextStyle(fontSize: 25.0)),
                       ),
                     ),
@@ -96,7 +102,7 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Text(
-                            'Date of first recognition: ${dataList[0]["dateandtimeoffirstrecognition"]}'),
+                            'Date of first recognition: ${dataList1[0]["dateandtimeoffirstrecognition"]}'),
                       ),
                     ),
                     Padding(
@@ -104,9 +110,9 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: Text(
-                            'Date of last recognition: ${dataList[0]["dateandtimeoflastrecognition"]}'),
+                            'Date of last recognition: ${dataList1[0]["dateandtimeoflastrecognition"]}'),
                       ),
-                    ), /*
+                    ),
               Expanded(
                 /*
                 * images list style
@@ -116,13 +122,10 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                             controller: _firstController,
                             child: ListView.builder(
                                 controller: _firstController,
-                                itemCount: dataList.length,
+                                itemCount: dataList2.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return ImageWidget(_id);
-                                }));
-                      }
-                    }),
-              )*/
+                                  return ImageWidget(_id, dataList2[index]["imageid"]);
+                                }))),
                   ],
                 ));
           });
