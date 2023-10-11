@@ -27,7 +27,7 @@ class Users {
 
     getAllImages = async (request, response) => {
         let user_id = request.query.id;
-        await pool.query('select imageid, name from images order by dateandtime  where identifiedpersonid = $1', [user_id], (error, results) => {
+        await pool.query('select imageid, dateandtime from images where identifiedpersonid = $1 order by dateandtime', [user_id], (error, results) => {
             if (error) {
                 console.log(error);
                 console.log("DETAILS ", error.detail);
