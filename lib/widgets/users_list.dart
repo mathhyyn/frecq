@@ -45,9 +45,9 @@ class UsersListPage extends StatelessWidget {
                                                       ["identifiedpersonid"])));
                                     },
                                     style: TextButton.styleFrom(
-                                        foregroundColor: Colors.red,
+                                        foregroundColor: Colors.indigo,
                                         elevation: 2,
-                                        backgroundColor: Colors.amber),
+                                        backgroundColor: const Color.fromARGB(150, 148, 250, 237)),
                                     child: Center(
                                         child:
                                             Text('${dataList[index]["name"]}')),

@@ -15,9 +15,9 @@ class MainScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const UsersListPage()));
         },
         style: TextButton.styleFrom(
-            foregroundColor: Colors.red,
+            foregroundColor: Colors.indigo,
             elevation: 2,
-            backgroundColor: Colors.amber),
+            backgroundColor: const Color.fromARGB(150, 148, 250, 237)),
         child: const Text('open users list'),
       )),
     );
@@ -27,9 +27,9 @@ class MainScreen extends StatelessWidget {
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
-      //brightness: Brightness.light,
+      brightness: Brightness.light,
       colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
-      scaffoldBackgroundColor: const Color.fromARGB(250, 0, 250, 154),
+      scaffoldBackgroundColor: const Color.fromARGB(250, 148, 239, 237),
     ),
     home: const MainScreen(),
     debugShowCheckedModeBanner: false,
