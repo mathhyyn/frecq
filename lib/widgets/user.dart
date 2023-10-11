@@ -8,18 +8,17 @@ class SecondScreen extends StatelessWidget {
   final String date1 = "13.08.2002";
   final String date2 = "13.08.2002";
 
-
   Future<List<dynamic>> getUserById(int _id) async {
     return await usrDB.getUserById(_id);
   }
+
   const SecondScreen(this._id, {super.key});
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
         future: getUserById(_id),
         builder: (context, snapshot) {
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
             return Center(child: Text('Ошибка: ${snapshot.error}'));
@@ -27,15 +26,14 @@ class SecondScreen extends StatelessWidget {
             List<dynamic> dataList1 = snapshot.data!;
             return Scaffold(
               appBar: AppBar(
-                title: Center(child:Text('${dataList1[0]["name"]}')),
+                title: Center(child: Text('${dataList1[0]["name"]}')),
               ),
               body: Center(
                 child: RawScrollbarExample(_id),
               ),
             );
           }
-        }
-    );
+        });
   }
 }
 
@@ -95,39 +93,38 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
       // Возвращаем виджет с полученными данными
       return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            return Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                            'Date of first recognition: ${dataList1[0]["dateandtimeoffirstrecognition"]}'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                            'Date of last recognition: ${dataList1[0]["dateandtimeoflastrecognition"]}'),
-                      ),
-                    ),
-              Expanded(
-                    child: Scrollbar(
-                        thumbVisibility: true,
+        return Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(0),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                    'Date of first recognition: ${dataList1[0]["dateandtimeoffirstrecognition"]}'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                    'Date of last recognition: ${dataList1[0]["dateandtimeoflastrecognition"]}'),
+              ),
+            ),
+            Expanded(
+                child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: _firstController,
+                    child: ListView.builder(
                         controller: _firstController,
-                        child: ListView.builder(
-                            controller: _firstController,
-                            child: ListView.builder(
-                                controller: _firstController,
-                                itemCount: dataList2.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ImageWidget(_id, dataList2[index]["imageid"]);
-                                }))),
-                  ],
-                );
-          });
+                        itemCount: dataList2.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ImageWidget(dataList1[0]["name"], index + 1,
+                              dataList2[index]["dateandtime"]);
+                        }))),
+          ],
+        );
+      });
     }
   }
 }
