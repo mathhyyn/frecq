@@ -10,20 +10,28 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('main page')),
       body: Center(
           child: TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const UsersListPage()));
-              },
-              child: const Text('open users list'))),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const UsersListPage()));
+        },
+        style: TextButton.styleFrom(
+            foregroundColor: Colors.indigo,
+            elevation: 2,
+            backgroundColor: const Color.fromARGB(150, 148, 250, 237)),
+        child: const Text('open users list'),
+      )),
     );
   }
 }
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
+    theme: ThemeData(
+      brightness: Brightness.light,
+      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan),
+      scaffoldBackgroundColor: const Color.fromARGB(250, 148, 239, 237),
+    ),
+    home: const MainScreen(),
     debugShowCheckedModeBanner: false,
-    home: MainScreen(),
   ));
 }
