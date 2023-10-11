@@ -5,20 +5,37 @@ import 'image.dart';
 
 class SecondScreen extends StatelessWidget {
   final int _id;
+
   final String date1 = "13.08.2002";
   final String date2 = "13.08.2002";
 
-  const SecondScreen(this._id, {super.key});
 
+  Future<List<dynamic>> getUserById(int _id) async {
+    return await usrDB.getUserById(_id);
+  }
+  const SecondScreen(this._id, {super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_id.toString()),
-      ),
-      body: Center(
-        child: RawScrollbarExample(_id),
-      ),
+    return FutureBuilder<List<dynamic>>(
+        future: getUserById(_id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState ==
+              ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
+          } else {
+            List<dynamic> dataList1 = snapshot.data!;
+            return Scaffold(
+              appBar: AppBar(
+                title: Center(child:Text('${dataList1[0]["name"]}')),
+              ),
+              body: Center(
+                child: RawScrollbarExample(_id),
+              ),
+            );
+          }
+        }
     );
   }
 }
@@ -79,24 +96,8 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
       // Возвращаем виджет с полученными данными
       return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            List<int> images = <int>[];
-            for (int i = 0; i < 50; i++) {
-              images.add(i);
-            }
-            /* something */
-
-            return Container(
-                color: const Color.fromARGB(50, 0, 250, 154),
-                child: Column(
+            return Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text('Name: ${dataList1[0]["name"]}',
-                            style: TextStyle(fontSize: 25.0)),
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(0),
                       child: Align(
@@ -127,7 +128,7 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
                                   return ImageWidget(_id, dataList2[index]["imageid"]);
                                 }))),
                   ],
-                ));
+                );
           });
     }
   }
