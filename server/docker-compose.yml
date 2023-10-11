@@ -9,6 +9,8 @@ services:
     command: -p ${DB_PORT}
     networks:
       - networkName1
+    volumes:
+      - db-data:/var/lib/postgresql/data
 
   node:
     depends_on:
@@ -30,4 +32,7 @@ services:
 networks:
   networkName1:
     driver: bridge
+
+volumes:
+  db-data:
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../api/user.dart' show usrDB;
 import 'image.dart';
 
-
 class SecondScreen extends StatelessWidget {
   final int _id;
   final String date1 = "13.08.2002";
@@ -33,12 +32,12 @@ class RawScrollbarExample extends StatefulWidget {
 }
 
 class _RawScrollbarExampleState extends State<RawScrollbarExample> {
-  Future<List<dynamic>> getUserById(int _id) async {
-    return await usrDB.getUserById(_id);
+  Future<List<dynamic>> getUserById(int id) async {
+    return await usrDB.getUserById(id);
   }
 
-  Future<List<dynamic>> getAllImages(int _id) async {
-    return await usrDB.getAllImages(_id);
+  Future<List<dynamic>> getAllImages(int id) async {
+    return await usrDB.getAllImages(id);
   }
 
   final int _id;
@@ -79,56 +78,57 @@ class _RawScrollbarExampleState extends State<RawScrollbarExample> {
       // Возвращаем виджет с полученными данными
       return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            List<int> images = <int>[];
-            for (int i = 0; i < 50; i++) {
-              images.add(i);
-            }
-            /* something */
+        List<int> images = <int>[];
+        for (int i = 0; i < 50; i++) {
+          images.add(i);
+        }
+        /* something */
 
-            return Container(
-                color: const Color.fromARGB(50, 0, 250, 154),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text('Name: ${dataList1[0]["name"]}',
-                            style: TextStyle(fontSize: 25.0)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                            'Date of first recognition: ${dataList1[0]["dateandtimeoffirstrecognition"]}'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                            'Date of last recognition: ${dataList1[0]["dateandtimeoflastrecognition"]}'),
-                      ),
-                    ),
-              Expanded(
-                /*
+        return Container(
+            color: const Color.fromARGB(50, 0, 250, 154),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Text('Name: ${dataList1[0]["name"]}',
+                        style: const TextStyle(fontSize: 25.0)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                        'Date of first recognition: ${dataList1[0]["dateandtimeoffirstrecognition"]}'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                        'Date of last recognition: ${dataList1[0]["dateandtimeoflastrecognition"]}'),
+                  ),
+                ),
+                Expanded(
+                    /*
                 * images list style
                 */
-                child: Scrollbar(
-                            thumbVisibility: true,
+                    child: Scrollbar(
+                        thumbVisibility: true,
+                        controller: _firstController,
+                        child: ListView.builder(
                             controller: _firstController,
-                            child: ListView.builder(
-                                controller: _firstController,
-                                itemCount: dataList2.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ImageWidget(_id, dataList2[index]["imageid"]);
-                                }))),
-                  ],
-                ));
-          });
+                            itemCount: dataList2.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ImageWidget(
+                                  _id, dataList1[0]["name"], dataList2[index]);
+                            }))),
+              ],
+            ));
+      });
     }
   }
 }
