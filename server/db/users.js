@@ -14,6 +14,7 @@ class Users {
     }
 
     getUserById = async (request, response) => {
+    let user_id = request.query.id;
         await pool.query('select * from identified_persons where identifiedpersonid = $1', [user_id], (error, results) => {
             if (error) {
                 console.log(error);
